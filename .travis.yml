@@ -7,12 +7,9 @@ script:
   - docker build -t pablobfonseca/node .
   - docker images pablobfonseca/node
 before_deploy:
-  - docker login -u pablobfonseca -p HUB_PASSWORD
+  - echo "$HUB_PASSWORD" | docker login -u "$HUB_USERNAME" --password=stdin
 deploy:
   provider: script
   script: docker push pablobfonseca/node
   on:
     branch: master
-env:
-  global:
-  - secure: SVoIYVOG2vtdZOxj1nwovq8jH7ceNzRmVL5ezh7DjiWfLNW33shQWj0k5jK+kycCAFPwHT+IcgQJ19UuP/4Kwkn/g4Qg+1JhMwyu1imna9lpl+Fhz9H/Nqs8wmTrbS2Xx9tpOK/azRSNvaqgSzTkKsfFhAPBwRw7fyxYGARscMJWIGQP06MufMuMr83RnoNXZyMqkgDVcPjIoc7KOzIQKwxwKiAx2YYEsCyPEz8ilsoF5nWkEVxWDdzgXWwwNRXd4tJrlqqZr0ZiAEYCw9RHAyt++P3WVs2d1mPowgyZW14ON83/YdEK3QHL2c5U4aIDLARK4l+gIJIzM0+hVuAZHD3BnwkW8DtsazaQ+KHJXKN5Dba9uA1fJHmmIgFdyJtkcRsQnB5q5/3m4uFQJw4sc+TB3MSxQPXN9LPbqlGNuOzdY20Elb7LpxTOoCCx7a/lQsjFdINdn6sPRWADPzsbeRl0k38Oylqcii85eo9auLG7KcC2wHr1iBTDTZeL/e3XiDTGy3k5n1acgZ45XfwvTXS+Y32iYV18NdHWO0526dHbEXMd7yGTwuFOGD8CgrzhzoJXsLj16qIwpG3+nkFctoC5emE+J91Dbgzk8HqCBP2Rf0X3XYriKfoNGCzil/FgUM+agfmFZPSL7v7cYSBUFguB/Qsv759u0YUGB5KFxZA=
