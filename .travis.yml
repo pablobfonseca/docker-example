@@ -3,7 +3,16 @@ node_js:
   - 12
 services:
   - docker
-
 script:
   - docker build -t pablobfonseca/node .
   - docker images pablobfonseca/node
+before_deploy:
+  - docker login -u pablobfonseca -p HUB_PASSWORD
+deploy:
+  provider: script
+  script: docker push pablobfonseca/node
+  on:
+    branch: master
+env:
+  global:
+    secure: kUW4yo4GZCa1iYq0tMBskzwzK/CPdVjgsdDcW/nu5rbKT4o1mqGOkexqDIk0fcYm+l+Qi24UoAOSiHYZe6sNIHxYZRTdSz0pLs1RAv4gquCQ+9zBIvafWpcWLFjUQAPJTLIJQG/9l1cYlr1I0ahPBUo1OuKt17LC0XmBcIAeEVRTAwwPN2BTSPrfrfcPdbEE2QyBQi/W6TzJpmHWDG0zludWutdOwIepoJv1U6kMxwvAUMOsJeIymnezN5aiz3Tpdc3bmg+zRA6mxzfWyk50niym4+xI3m72WD/P6MDRlS7I1gf7FobwagvVYWNTGWxRJQRxnjbz16NK4wtBinjuW9vXU2Z6o+iX9oF9K1puv//dIaFxE8rDBEz5tPlze4qcB56qBwV4AngoDpvwjq4SCkDKG5QzpoxvLlq+SZXTLnwdIrRaQ734ux3lYO+xaRmT0TjglUgZCdvxSwn5VdLYYqXo1hu1eGo8OAuXQj7d8LqrovGO2DIWuiKBsZOzqF1Hz+rdq8mhW6PLx0uR+WTlNodm22luwIOP6DN5i+oVP0Y7gPlpUFLvFpjF5/F+jUc4tr7MHWmyvKzt15tXfda8YfgjrUyIu+GkqNU/p8GRVm8SRqfZOBswEnHopIk/hO3m9BDlPOJbEI9ldDD9DOBppBM/Ds1nhtofbgPuYqhkfdo=
